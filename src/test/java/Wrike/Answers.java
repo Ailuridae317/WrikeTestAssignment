@@ -1,15 +1,20 @@
-package Wrike.pages;
+package Wrike;
 
 import java.util.Random;
 
+/**
+ * Created by Osychenko Yuriy on 12.03.2019
+ * Class to generate random answers on questions
+ */
+
 public class Answers {
-    static Random random;
+    private static Random random;
 
     public Answers(){
         random = new Random();
     }
 
-    public static String getInterestAnswer(){
+    public String getInterestAnswer(){
         int interest = random.nextInt(2) + 1;
         String interestChoice = "";
         switch (interest){
@@ -23,7 +28,7 @@ public class Answers {
         return interestChoice;
     }
 
-    public static String getMembersAnswer(){
+    public String getMembersAnswer(){
         int members = random.nextInt(5) +1;
         String membersChoice = "";
         switch (members){
@@ -43,7 +48,7 @@ public class Answers {
         return membersChoice;
     }
 
-    public static String getBusinessAnswer(){
+    public String getBusinessAnswer(){
         int business = random.nextInt(3) +1;
         String businessChoice = "";
         switch (business){

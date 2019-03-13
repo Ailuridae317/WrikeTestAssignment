@@ -8,26 +8,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Random;
 
+/**
+ * Created by Osychenko Yuriy on 12.03.2019
+ * Class to configurate necessary objects before each test and to close them after
+ */
+
 public class WebDriverConfig {
 
-    public WebDriver driver;
-
-    public WebDriverWait wait;
-
-    public Random random;
-
-
+    protected WebDriver driver;
 
     @Before
     public void setUp(){
         System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver2.46.exe");
-
         driver = new ChromeDriver();
-
-        wait = new WebDriverWait(driver, 15);
-
-        random = new Random();
-
     }
 
     @After

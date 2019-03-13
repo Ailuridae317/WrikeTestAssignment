@@ -14,8 +14,9 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SignUpTest extends WebDriverConfig {
 
+
     @Test
-    public void signUpTest(){
+    public void signUpTestSuccess(){
 
         HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 
@@ -26,26 +27,38 @@ public class SignUpTest extends WebDriverConfig {
 
         SurveyPage surveyPage = PageFactory.initElements(driver, SurveyPage.class);
 
-        surveyPage.answerInterestQuestion();
-        surveyPage.answerMembersQuestion();
-        surveyPage.answerBusinessQuestion();
-        surveyPage.submitAnswers();
-        Assert.assertTrue(surveyPage.answersAreSubmitted());
-        surveyPage.clickResendButton();
-        Assert.assertTrue(surveyPage.emailIsResent());
-        surveyPage.twitterLinkIsOk();
-        surveyPage.twitterLogoIsOk();
-
-
-
-
-
-
-        System.out.println("THE END");
-
+        Assert.assertTrue(surveyPage.pageIsLoaded());
+        surveyPage.answerInterestQuestion(); //You can add argument to change answer
+        surveyPage.answerMembersQuestion(); //You can add argument to change answer
+        surveyPage.answerBusinessQuestion(); //You can add argument to change answer
+        Assert.assertTrue(surveyPage.submitAnswers());
+        Assert.assertTrue(surveyPage.clickResendButton());
+        Assert.assertTrue(surveyPage.twitterLinkIsOk());
+        Assert.assertTrue(surveyPage.twitterLogoIsOk());
     }
 
+    @Test
+    public void signUpTestFailure(){
+        HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 
+        homePage.open();
+        homePage.clickGetStartedButton();
+        homePage.submitTheForm();
+        Assert.assertTrue(homePage.dataMissing());
+    }
 
+    @Test
+    public void signUpTestFailure2(){
+        HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 
+        homePage.open();
+        homePage.clickGetStartedButton();
+        homePage.fillTheForm();
+        homePage.submitTheForm();
+
+        SurveyPage surveyPage = PageFactory.initElements(driver, SurveyPage.class);
+
+        Assert.assertTrue(surveyPage.pageIsLoaded());
+        Assert.assertFalse(surveyPage.submitAnswers());
+    }
 }
